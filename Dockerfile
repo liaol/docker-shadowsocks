@@ -6,8 +6,8 @@ FROM ubuntu:14.04.3
 MAINTAINER Dariel Dato-on <oddrationale@gmail.com>
 
 RUN apt-get update && \
-    apt-get install -y python-pip
-RUN pip install shadowsocks==2.8.2
+    apt-get install -y python-pip libsodium18 git
+pip install git+https://github.com/shadowsocks/shadowsocks.git@master
 
 # Configure container to run as an executable
-RUN ssserver -p $SS_PORT -k $SS_PWD -m aes-256-cfb
+ENTRYPOINT ["/usr/local/bin/ssserver"]
